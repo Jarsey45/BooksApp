@@ -1,0 +1,19 @@
+@use "../../scss/vars.scss" as *;
+
+
+.volumes{
+  width: 80%;
+  margin: 5em auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  
+
+
+  .loading{
+    align-self: center;
+    height: 3em;
+    width: 3em;
+  }
+}
