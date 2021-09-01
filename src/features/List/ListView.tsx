@@ -8,10 +8,7 @@ import VolumeCard from './VolumeCard';
 
 
 
-
-
 const ListView: React.FC = () => {
-  //const classes = useStyles();
   const App = useRef<HTMLDivElement>(null);
   const index = useRef(0);
 
@@ -51,12 +48,6 @@ const ListView: React.FC = () => {
     setLoading(true);
     index.current = 0;
 
-    // GET_VOLUMES_BY_SEARCH(text, index.current.toString())
-    //   .then(({ status, data }) => {
-    //     index.current += 10;
-    //     if (status && data) setVolumes(data)
-    //   })
-
   }, [text])
 
   useEffect(() => {
@@ -64,9 +55,6 @@ const ListView: React.FC = () => {
       fetchMoreVolumes();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading])
-
-  //useEffect(() => { setLoading(false) }, [volumes]);
-
 
 
   return (

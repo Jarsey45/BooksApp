@@ -1,0 +1,26 @@
+@use '../../scss/vars.scss' as *;
+
+.volCard{
+  width: 80%;
+  margin: 5em auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+
+  .loading{
+    margin: 15% 0;
+  }
+
+  .link{
+    border-color: $primary-color !important;
+    float:right;
+  }
+
+  .backArrow {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    background-color: $primary-color !important;
+  }
+}

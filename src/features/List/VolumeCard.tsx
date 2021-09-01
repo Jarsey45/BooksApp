@@ -1,5 +1,6 @@
 //import React from 'react'
 import { Card, CardContent, Typography, CardMedia, makeStyles, createStyles, Theme } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 import { Volume as VolumeProps } from '../../api/Queries';
 
 
@@ -32,7 +33,9 @@ const VolumeCard: React.FC<{ data: VolumeProps }> = ({ data }) => {
       <CardContent>
 
         <Typography variant="h5" color="primary" component="h2">
-          {data.title}
+          <Link to={`/books/${data.id}`}>
+            {data.title}
+          </Link>
         </Typography>
         <Typography className={classes.subtitle} variant="subtitle2" color="textSecondary" gutterBottom component='p'>
           {data.subtitle}
@@ -44,7 +47,7 @@ const VolumeCard: React.FC<{ data: VolumeProps }> = ({ data }) => {
         </Typography>
         <Typography variant="body2" component="p">
           {(data.description && data.description.length > 120)
-            ? data.description.slice(0, 120) + "(...)"
+            ? data.description.slice(0, 120).replace(/<\/?[^>]+(>|$)/g, "") + "(...)"
             : data.description}
         </Typography>
         <Typography color="textSecondary" component="span" align="center">

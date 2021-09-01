@@ -1,7 +1,8 @@
 import axios from 'axios';
 
-const API_BASE = "https://www.googleapis.com/books/v1/volumes?q=";
-const API_KEY = "AIzaSyA91RzlBdFO2QhlcFZa0A0RKVPy3lhUo6Y";
+const API_VOLUMES_BASE = "https://www.googleapis.com/books/v1/volumes?q=";
+const API_VOL_BASE = "https://www.googleapis.com/books/v1/volumes/";
+const API_KEY = process.env.REACT_APP_GOOGLE_BOOKS_API_KEY;
 const BOOK_SUBJECT = "fiction"
 
 export interface Volume {
@@ -15,30 +16,33 @@ export interface Volume {
 }
 
 export interface VolumeDetails extends Volume {
-  acsTokenLink?: string;
-  pubDomain: boolean;
+  acsTokenLink: string | null;
 }
 
 interface ResponseVolumes {
   status: boolean;
-  data?: Array<Volume>;
+  data: Array<Volume>;
+}
+interface ResponseVol extends Omit<ResponseVolumes, 'data'> {
+  data: VolumeDetails;
+  additionalInfo?: string
 }
 
 /**
- * Queries google books api with given text and returns response.
- * @param query 
+ * @desc Queries google books api with given text and returns response.
+ * @param query text to query 
  * @param index from what index will query start
- * @returns Promise with status and data
+ * @returns Promise with {status} and volumes[]
  */
 export const GET_VOLUMES_BY_SEARCH = async (query: string, index: string) => {
   try {
-    const response = await axios.get(`${API_BASE}${query}+subject:${BOOK_SUBJECT}&startIndex=${index}&maxResults=20&key=${API_KEY}`);
+    const response = await axios.get(`${API_VOLUMES_BASE}${query}+subject:${BOOK_SUBJECT}&startIndex=${index}&maxResults=20&key=${API_KEY}`);
 
     if (!response.data.items)
       return {
         status: false,
         data: []
-      }
+      } as ResponseVolumes
 
     const data: Volume[] = response.data.totalItems > 0
       ? response.data.items.map((book: any) => {
@@ -56,14 +60,47 @@ export const GET_VOLUMES_BY_SEARCH = async (query: string, index: string) => {
       : [];
 
     // console.table(data)
-    const Volumes: ResponseVolumes = {
+    return {
       status: true,
       data
-    }
-
-    return Volumes;
+    } as ResponseVolumes;
   } catch (error) {
     console.error(error);
-    return { status: false };
+    return { status: false } as ResponseVolumes;
+  }
+}
+
+
+
+/**
+ * Queries google books api with given text and returns response.
+ * @param id id to query 
+ * @returns Promise with status and volume info
+ */
+export const GET_VOLUME_BY_ID = async (id: string) => {
+  try {
+    const response = await axios.get(`${API_VOL_BASE}${id}?key=${API_KEY}`);
+
+    const { title, subtitle, authors, publishedDate, description, imageLinks } = response.data.volumeInfo;
+    const { publicDomain, epub } = response.data.accessInfo;
+
+    const data: VolumeDetails = {
+      title,
+      subtitle,
+      authors,
+      publishedDate,
+      description,
+      thumbnail: imageLinks.thumbnail,
+      id: response.data.id,
+      acsTokenLink: (typeof epub.acsTokenLink === 'string' &&
+        publicDomain === true) ?
+        epub.acsTokenLink :
+        null
+    };
+
+    return { status: true, data } as ResponseVol;
+  } catch (error) {
+    console.error("An error occurred", " => \n", error);
+    return { status: false, additionalInfo: 'not found' } as ResponseVol;
   }
 }
