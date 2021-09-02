@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect,  useState } from 'react'
 import Grid from '@material-ui/core/Grid';
-import { Redirect, useParams } from 'react-router-dom';
+import {  useParams } from 'react-router-dom';
 import { GET_VOLUME_BY_ID, VolumeDetails } from '../../api/Queries';
 import { Card, CardContent, CardMedia, CircularProgress, Typography, Button, Fab, Icon } from '@material-ui/core';
 import { Alert, AlertTitle } from '@material-ui/lab';

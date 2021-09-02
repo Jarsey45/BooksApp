@@ -10,7 +10,7 @@ Used frameworks/libs:
   
 
 ## Disclaimer
-You must first change your api key in ***.env.template*** file. 
+You must first change your api key in ***.env*** file. 
   
 Then start app with..
 ```
