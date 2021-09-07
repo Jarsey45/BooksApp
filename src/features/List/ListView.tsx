@@ -5,6 +5,7 @@ import SearchBar from './SearchBar';
 import "./List.scss";
 import { GET_VOLUMES_BY_SEARCH, Volume } from '../../api/Queries';
 import VolumeCard from './VolumeCard';
+import useDebounced from '../Hooks/debounce';
 
 
 
@@ -15,6 +16,7 @@ const ListView: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [volumes, setVolumes] = useState<Volume[]>([]);
   const [text, setText] = useState<string>("");
+  const debouncedText = useDebounced(text);
 
 
   const fetchMoreVolumes = async () => {
@@ -48,7 +50,7 @@ const ListView: React.FC = () => {
     setLoading(true);
     index.current = 0;
 
-  }, [text])
+  }, [debouncedText])
 
   useEffect(() => {
     if (loading)
