@@ -1,0 +1,1 @@
+//! works better and faster than with react-router

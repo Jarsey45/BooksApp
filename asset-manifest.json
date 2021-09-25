@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/BooksApp/static/css/main.d1f062c9.chunk.css",
+    "main.js": "/BooksApp/static/js/main.b60e428f.chunk.js",
+    "main.js.map": "/BooksApp/static/js/main.b60e428f.chunk.js.map",
+    "runtime-main.js": "/BooksApp/static/js/runtime-main.1245b784.js",
+    "runtime-main.js.map": "/BooksApp/static/js/runtime-main.1245b784.js.map",
+    "static/js/2.9e98cc23.chunk.js": "/BooksApp/static/js/2.9e98cc23.chunk.js",
+    "static/js/2.9e98cc23.chunk.js.map": "/BooksApp/static/js/2.9e98cc23.chunk.js.map",
+    "static/js/3.1c95bb7b.chunk.js": "/BooksApp/static/js/3.1c95bb7b.chunk.js",
+    "static/js/3.1c95bb7b.chunk.js.map": "/BooksApp/static/js/3.1c95bb7b.chunk.js.map",
+    "index.html": "/BooksApp/index.html",
+    "static/css/main.d1f062c9.chunk.css.map": "/BooksApp/static/css/main.d1f062c9.chunk.css.map",
+    "static/js/2.9e98cc23.chunk.js.LICENSE.txt": "/BooksApp/static/js/2.9e98cc23.chunk.js.LICENSE.txt",
+    "static/js/main.b60e428f.chunk.js.LICENSE.txt": "/BooksApp/static/js/main.b60e428f.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.1245b784.js",
+    "static/js/2.9e98cc23.chunk.js",
+    "static/css/main.d1f062c9.chunk.css",
+    "static/js/main.b60e428f.chunk.js"
+  ]
+}
